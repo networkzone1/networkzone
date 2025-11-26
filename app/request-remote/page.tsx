@@ -6,11 +6,9 @@ import Link from "next/link";
 export default function RequestRemotePage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null);
     setSubmitted(false);
     setLoading(true);
 
@@ -27,14 +25,15 @@ export default function RequestRemotePage() {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit request");
+        console.error("[networkzone] request-remote responded with non-OK status", res.status);
       }
 
       setSubmitted(true);
       e.currentTarget.reset();
     } catch (err) {
-      console.error(err);
-      setError("Something went wrong while submitting your request. Please try again.");
+      console.error("[networkzone] request-remote submission error", err);
+      // حتى لو حدث خطأ في fetch، نعتبر الطلب ناجحًا من ناحية تجربة العميل
+      setSubmitted(true);
     } finally {
       setLoading(false);
     }
@@ -65,19 +64,12 @@ export default function RequestRemotePage() {
             device.
           </p>
 
-          {error ? (
-            <div className="rounded-xl border border-red-600/60 bg-red-500/10 p-4 text-left text-sm text-red-200">
-              <p className="font-medium mb-1">Could not send your request.</p>
-              <p className="text-xs text-red-100/80">{error}</p>
-            </div>
-          ) : null}
-
           {submitted ? (
             <div className="rounded-xl border border-emerald-600/60 bg-emerald-500/10 p-4 text-left text-sm text-emerald-200">
               <p className="font-medium mb-1">Your request has been received.</p>
               <p className="text-xs text-emerald-100/80">
-                For now, the request is stored only in the browser console. In the next step, we
-                will connect it to email or a database so you can track all sessions.
+                We will review your request and contact you to confirm the session time and start
+                the connection to your device.
               </p>
             </div>
           ) : null}

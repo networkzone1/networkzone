@@ -2,37 +2,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-zinc-50 flex items-center justify-center px-4 font-sans">
-      <main className="w-full max-w-5xl py-12">
-        <header className="flex items-center justify-between mb-10">
-          <div className="flex flex-col items-start gap-1">
-            <span className="text-sm uppercase tracking-[0.25em] text-yellow-400/80">
-              networkzone
-            </span>
-            <h1 className="text-2xl font-semibold text-zinc-50">
-              Remote IT support for small businesses
-            </h1>
-          </div>
-          <nav className="flex items-center gap-4 text-sm text-zinc-300">
-            <Link href="/" className="hover:text-yellow-400 transition-colors">
-              Home
-            </Link>
-            <Link
-              href="/request-remote"
-              className="hover:text-yellow-400 transition-colors"
-            >
-              Request remote session
-            </Link>
-            <Link
-              href="/download"
-              className="hover:text-yellow-400 transition-colors"
-            >
-              Download tool
-            </Link>
-          </nav>
-        </header>
-
-        <section className="grid gap-10 md:grid-cols-[1.4fr_1fr] items-start">
+    <div className="font-sans space-y-10">
+      <section className="grid gap-10 md:grid-cols-[1.4fr_1fr] items-start mt-6">
           <div className="space-y-6 text-left md:order-1">
             <p className="text-sm text-yellow-400/90 font-medium">Online IT support</p>
             <h2 className="text-3xl md:text-4xl font-bold leading-relaxed">
@@ -110,7 +81,39 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+
+      <section className="grid gap-6 md:grid-cols-[1.2fr_1fr] items-start">
+        <div className="space-y-4 text-left">
+          <h2 className="text-lg md:text-xl font-semibold text-zinc-50">How networkzone works</h2>
+          <ol className="space-y-3 text-sm text-zinc-300 list-decimal list-inside">
+            <li>
+              <span className="font-medium text-zinc-50">Client downloads the tool.</span> They go to
+              your website and download the networkzone remote tool for Windows.
+            </li>
+            <li>
+              <span className="font-medium text-zinc-50">Client shares their Client ID.</span> They
+              open the tool, read the Client ID, and send it to you through the request form.
+            </li>
+            <li>
+              <span className="font-medium text-zinc-50">You connect and fix the issue.</span> You
+              start a secure remote session, see their screen, and solve the problem while they
+              watch.
+            </li>
+          </ol>
+        </div>
+
+        <div className="space-y-3 text-left text-sm text-zinc-300">
+          <h3 className="text-sm font-semibold text-zinc-50">Who is this for?</h3>
+          <p>
+            networkzone is ideal for solo IT engineers and small IT teams who support multiple
+            clients and want a simple, repeatable way to start remote sessions.
+          </p>
+          <p>
+            Instead of sending random remote links every time, you have a single place where
+            clients download the tool and request a session, all under your own brand.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
